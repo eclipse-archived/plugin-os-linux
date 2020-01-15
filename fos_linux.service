@@ -6,7 +6,7 @@ After=fos_agent.target
 [Service]
 Type=simple
 PIDFile=/var/fos/os/os.pid
-ExecStart = /etc/fos/plugins/linux/linux_plugin /etc/fos/plugins/linux/linux_plugin.json
+ExecStart = /etc/fos/plugins/plugin-os-linux/linux_plugin /etc/fos/plugins/plugin-os-linux/linux_plugin.json
 KillMode=process
 Restart=on-failure
 User=fos

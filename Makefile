@@ -1,11 +1,13 @@
+# -*-Makefile-*-
+
+LINUX_PLUGIN_DIR = /etc/fos/plugins/plugin-os-linux
+LINUX_PLUGIN_CONFFILE = /etc/fos/plugins/plugin-os-linux/linux_plugin.json
 
 all:
 	echo "Nothing to do..."
 
 install:
 
-LINUX_PLUGIN_DIR = /etc/fos/plugins/plugin-os-linux
-LINUX_PLUGIN_CONFFILE = /etc/fos/plugins/plugin-os-linux/linux_plugin.json
 
 ifeq "$(wildcard $(LINUX_PLUGIN_DIR))" ""
 	mkdir -p /etc/fos/plugins/plugin-os-linux/

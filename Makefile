@@ -5,6 +5,9 @@ UUID = $(shell ./to_uuid.sh)
 LINUX_PLUGIN_DIR = /etc/fos/plugins/plugin-os-linux
 LINUX_PLUGIN_CONFFILE = /etc/fos/plugins/plugin-os-linux/linux_plugin.json
 
+clean:
+	echo "nothing to do..."
+
 all:
 	echo "Nothing to do..."
 

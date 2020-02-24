@@ -17,11 +17,15 @@ install:
 
 ifeq "$(wildcard $(LINUX_PLUGIN_DIR))" ""
 	mkdir -p $(LINUX_PLUGIN_DIR)
-	sudo cp -r . $(LINUX_PLUGIN_DIR)
+	sudo cp -r scripts $(LINUX_PLUGIN_DIR)
+	sudo cp linux_plugin $(LINUX_PLUGIN_DIR)
+	sudo cp fos_linux.service $(LINUX_PLUGIN_DIR)
+	sudo cp linux_plugin.json $(LINUX_PLUGIN_DIR)
 else
 	sudo cp -r scripts $(LINUX_PLUGIN_DIR)
 	sudo cp __init__.py $(LINUX_PLUGIN_DIR)
 	sudo cp linux_plugin $(LINUX_PLUGIN_DIR)
+	sudo cp fos_linux.service $(LINUX_PLUGIN_DIR)
 endif
 
 	sudo cp $(LINUX_PLUGIN_DIR)/fos_linux.service /lib/systemd/system/

@@ -4,6 +4,7 @@
 UUID = $(shell ./to_uuid.sh)
 LINUX_PLUGIN_DIR = /etc/fos/plugins/plugin-os-linux
 LINUX_PLUGIN_CONFFILE = /etc/fos/plugins/plugin-os-linux/linux_plugin.json
+SYSTEMD_DIR = /lib/systemd/system/
 
 clean:
 	echo "nothing to do..."
@@ -28,5 +29,5 @@ else
 	sudo cp fos_linux.service $(LINUX_PLUGIN_DIR)
 endif
 
-	sudo cp $(LINUX_PLUGIN_DIR)/fos_linux.service /lib/systemd/system/
+	sudo cp $(LINUX_PLUGIN_DIR)/fos_linux.service $(SYSTEMD_DIR)
 	sudo sh -c "echo $(UUID) | xargs -i  jq  '.configuration.nodeid = \"{}\"' $(LINUX_PLUGIN_DIR)/linux_plugin.json > /tmp/os_plugin.tmp && mv /tmp/os_plugin.tmp $(LINUX_PLUGIN_DIR)/linux_plugin.json"

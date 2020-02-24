@@ -11,17 +11,18 @@ clean:
 all:
 	echo "Nothing to do..."
 
+
 install:
 
 
 ifeq "$(wildcard $(LINUX_PLUGIN_DIR))" ""
-	mkdir -p /etc/fos/plugins/plugin-os-linux/
-	sudo cp -r . /etc/fos/plugins/plugin-os-linux/
+	mkdir -p $(LINUX_PLUGIN_DIR)
+	sudo cp -r . $(LINUX_PLUGIN_DIR)
 else
-	sudo cp -r scripts /etc/fos/plugins/plugin-os-linux/
-	sudo cp __init__.py /etc/fos/plugins/plugin-os-linux/
-	sudo cp linux_plugin /etc/fos/plugins/plugin-os-linux/
+	sudo cp -r scripts $(LINUX_PLUGIN_DIR)
+	sudo cp __init__.py $(LINUX_PLUGIN_DIR)
+	sudo cp linux_plugin $(LINUX_PLUGIN_DIR)
 endif
 
-	sudo cp /etc/fos/plugins/plugin-os-linux/fos_linux.service /lib/systemd/system/
-	sudo sh -c "echo $(UUID) | xargs -i  jq  '.configuration.nodeid = \"{}\"' /etc/fos/plugins/plugin-os-linux/linux_plugin.json > /tmp/os_plugin.tmp && mv /tmp/os_plugin.tmp /etc/fos/plugins/plugin-os-linux/linux_plugin.json"
+	sudo cp $(LINUX_PLUGIN_DIR)/fos_linux.service /lib/systemd/system/
+	sudo sh -c "echo $(UUID) | xargs -i  jq  '.configuration.nodeid = \"{}\"' $(LINUX_PLUGIN_DIR)/linux_plugin.json > /tmp/os_plugin.tmp && mv /tmp/os_plugin.tmp $(LINUX_PLUGIN_DIR)/linux_plugin.json"

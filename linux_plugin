@@ -739,11 +739,10 @@ class Linux(OSPlugin):
     def __get_io_devices(self):
         dev = []
         gpio_path = '/sys/class/gpio'  # gpiochip0
-        gpio_devices = [f for f in os.listdir(gpio_path) if f not in [
-            'export', 'unexport']]
-        for d in gpio_devices:
-            dev.append({'name': d, 'io_type': 'gpio',
-                        'io_file': gpio_path+os.path.sep+d, 'available': True})
+        if os.path.isdir(gpio_path):
+            gpio_devices = [f for f in os.listdir(gpio_path) if f not in ['export', 'unexport']]
+            for d in gpio_devices:
+                dev.append({'name': d, 'io_type': 'gpio', 'io_file': gpio_path+os.path.sep+d, 'available': True})
 
         return dev
 

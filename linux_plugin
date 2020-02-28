@@ -651,13 +651,17 @@ class Linux(OSPlugin):
     def get_disks_information(self):
         disks = []
         for d in psutil.disk_partitions():
-            dev = d[0]
-            mount = d[1]
-            dim = psutil.disk_usage(
-                mount)[0] / 1024 / 1024 / 1024  # conversion to gb
-            fs = d[2]
-            disks.append({'local_address': dev, 'dimension': dim,
-                          'mount_point': mount, 'filesystem': fs})
+            try:
+                dev = d[0]
+                mount = d[1]
+                dim = psutil.disk_usage(
+                    mount)[0] / 1024 / 1024 / 1024  # conversion to gb
+                fs = d[2]
+                disks.append({'local_address': dev, 'dimension': dim,
+                            'mount_point': mount, 'filesystem': fs})
+            except Exception as e:
+                self.logger.info('get_disks_information()', 'Error when getting disk inforamation for {} - {}'.format(d, e))
+                pass
         return disks
 
     def get_io_informations(self):
